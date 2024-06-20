@@ -20,21 +20,23 @@
         m-2 shadow-blue-500;
     }
     .input_info {
-      @apply border rounded-md px-3 py-2 ring-1 ring-gray-100
-        focus:outline-none focus:ring-2 
-        focus:ring-blue-500 w-56;
+      @apply border rounded-md px-3 py-2 ring-1 ring-gray-100 
+        focus:outline-none focus:ring-2 mr-1
+        focus:ring-blue-500 w-auto;
     }
     .card_base {
       @apply grid grid-cols-2 gap-1 m-2;
     }
-
+    .card_base_3_c {
+      @apply grid grid-cols-3 gap-1 m-2;
+    }
     .label {
       @apply text-center w-auto;
     }
     .basic_button {
       @apply m-1 bg-blue-500 hover:bg-blue-700 
       text-white font-bold flex justify-center items-center
-      py-2 px-4 col-span-2 h-14 
+      py-2 px-4 col-span-2 h-14 w-auto mr-2
       rounded-md;
     }
     .upload_button {
@@ -45,9 +47,29 @@
         py-2 px-3 col-span-2 h-14 
         rounded-md;
     }
-    .data_info {
-      @apply text-lg leading-none text-gray-500  w-auto border rounded-md px-3 py-2 ring-1 ring-gray-100
+    .p-data_info {
+      @apply text-lg leading-none text-gray-500  w-auto border rounded-md px-3 py-2 ring-1 ring-gray-100 mr-1
       font-mono;
+    }
+    .p-history_info {
+      @apply text-lg leading-none text-gray-500 ml-2 mb-7 w-72 border rounded-md ring-1 ring-gray-100 
+      font-mono;
+    }
+    .card_save {
+      @apply grid bg-white w-[380px] h-52
+        justify-items-center items-center 
+        text-lg leading-none text-gray-500 
+        font-mono 
+        rounded-lg shadow-sm  
+        m-2 shadow-blue-500;
+    }
+    .save_button {
+      @apply m-1 bg-green-500 hover:bg-green-700
+       text-white font-bold
+        flex justify-center
+         items-center
+        py-2 px-3 col-span-3 h-14 
+        rounded-md;
     }
   </style>
   <body data-theme="light">
@@ -87,75 +109,140 @@
 
           <div class="flex flex-row">
             <div class="card">
-              <h2 class="text-2xl font-mono mb-1 text-center">
-                Данные
-              </h2>
+              <h2 class="text-2xl font-mono mb-1 text-center">Данные</h2>
               <div class="card_base">
                 <label class="label">ID:</label>
-                <p class="data_info" id=""></p>
-
+                <p class="p-data_info" id="ID"></p>
                 <label class="label">DIDCODE:</label>
-                <p class="data_info" id="didcode-data"></p>
-
+                <p class="p-data_info" id="didcode-data"></p>
                 <label class="label">PART_NUMBER:</label>
-                <p class="data_info" id="part-number-data"></p>
-                
+                <p class="p-data_info" id="part-number-data"></p>
                 <label class="label">QTY:</label>
-                <p class="data_info" id="qty-data">50</p>
+                <p class="p-data_info" id="qty-data">50</p>
                 <label class="label">LOT_ID:</label>
-                <p class="data_info" id="insertion_datetime">301</p>
+                <p class="p-data_info" id="insertion_datetime">301</p>
                 <label class="label">INSERTION_DATETIME</label>
-                <p class="data_info" id="insertion_userid">2024-05-06 13:51:07.000</p>
+                <p class="p-data_info" id="insertion_userid">
+                  2024-05-06 13:51:07.000
+                </p>
                 <label class="label">INSERTION_USERID:</label>
-                <p class="data_info" id="insertion_userid">4</p>
+                <p class="p-data_info" id="insertion_userid">4</p>
                 <label class="label">UPDATE_DATETIME:</label>
-                <p class="data_info" id="udpate_datetime">2024-05-06 13:51:07.000</p>
+                <p class="p-data_info" id="udpate_datetime">
+                  2024-05-06 13:51:07.000
+                </p>
                 <label class="label">UPDATE_USER_ID:</label>
-                <p class="data_info" id="update_user_id">0</p>
+                <p class="p-data_info" id="update_user_id">0</p>
                 <label class="label">WAREHOUSE:</label>
-                <p class="data_info" id="warehouse">1</p>
+                <p class="p-data_info" id="warehouse">1</p>
                 <div class="upload_button">
                   <button id="upload_button">Загрузить</button>
                 </div>
               </div>
             </div>
-  
-      
+
+            <div class="flex flex-col">
+              <div class="card_save">
+                <h2 class="text-2xl font-mono mb-1 text-center">
+                  Внести изменения
+                </h2>
+
+                <div class="card_base_3_c">
+                  <label class="label">Параметр:</label>
+                  <select class="input_info" id="parameter-select">
+                    <option value="ID">ID</option>
+                    <option value="DIDCODE">DIDCODE</option>
+                    <option value="PART_NUMBER">PART_NUMBER</option>
+                    <option value="QTY">QTY</option>
+                    <option value="LOT_ID">LOT_ID</option>
+                    <option value="INSERTION_DATETIME">
+                      INSERTION_DATETIME
+                    </option>
+                    <option value="INSERTION_USERID">INSERTION_USERID</option>
+                    <option value="UPDATE_DATETIME">UPDATE_DATETIME</option>
+                    <option value="UPDATE_USER_ID">UPDATE_USER_ID</option>
+                    <option value="WAREHOUSE">WAREHOUSE</option>
+                  </select>
+                  <input class="input_info" id="input-info" />
+                  <div class="save_button">
+                    <button id="upload_button">Сохранить</button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-row">
+                <div class="card">
+                  <div class="flex flex-row justify-between items-center">
+                    <label class="label text-2xl justify-center items-start"
+                      >История изменений:
+                    </label>
+                    <button class="basic_button">Перезагрузить</button>
+                  </div>
+                  <div class="card_base w-[305px] h-72 overflow-y-auto">
+                    <table class="table-auto w-full border border-b-gray-500">
+                      <thead>
+                        <tr>
+                          <th class="th">Действие</th>
+                          <th class="px-4 py-0.5">ID</th>
+                          <th class="px-4 py-0.5">Время</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="px-4 py-1 text-green-500">
+                            Сохранено изменение
+                          </td>
+                          <td class="px-4 py-0.5">12345</td>
+                          <td class="px-4 py-0.5">2023-10-26 10:30:00</td>
+                        </tr>
+                        <tr>
+                          <td class="px-4 py-0.5 text-red-500">
+                            Внесения удалены
+                          </td>
+                          <td class="px-4 py-0.5">67890</td>
+                          <td class="px-4 py-0.5">2023-10-26 11:15:00</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- добавить еще карточку -->
             </div>
-            <script>
-              window.onload = async function () {
-                let response = await fetch("/get_info/DX562378");
-                if (response.ok) {
-                  let json = await response.json();
-
-                  console.log(json);
-
-                  document.getElementById("didcode-data").textContent =
-                    json.DIDCODE;
-
-                  document.getElementById("part-number-data").textContent =
-                    json.PART_NUMBER;
-
-                  document.getElementById("qty-data").textContent = json.QTY;
-
-                  document.getElementById("insertion_datetime").textContent =
-                    json.INSERTION_DATETIME;
-                  document.getElementById("insertion_userid").textContent =
-                    json.INSERTION_USERID;
-                  document.getElementById("udpate_datetime").textContent =
-                    json.UPDATE_DATETIME;
-                  document.getElementById("update_user_id").textContent =
-                    json.UPDATE_USER_ID;
-                  document.getElementById("warehouse").textContent =
-                    json.WAREHOUSE;
-                } else {
-                  alert("Ошибка HTTP: " + response.status);
-                }
-              };
-            </script>
           </div>
         </div>
       </div>
     </div>
   </body>
 </html>
+
+<script>
+  window.onload = async function () {
+    let response = await fetch("/get_info/DX562378");
+    if (response.ok) {
+      let json = await response.json();
+
+      console.log(json);
+
+      document.getElementById("ID").textContent = json.ID;
+      document.getElementById("didcode-data").textContent = json.DIDCODE;
+
+      document.getElementById("part-number-data").textContent =
+        json.PART_NUMBER;
+
+      document.getElementById("qty-data").textContent = json.QTY;
+
+      document.getElementById("insertion_datetime").textContent =
+        json.INSERTION_DATETIME;
+      document.getElementById("insertion_userid").textContent =
+        json.INSERTION_USERID;
+      document.getElementById("udpate_datetime").textContent =
+        json.UPDATE_DATETIME;
+      document.getElementById("update_user_id").textContent =
+        json.UPDATE_USER_ID;
+      document.getElementById("warehouse").textContent = json.WAREHOUSE;
+    } else {
+      alert("Ошибка HTTP: " + response.status);
+    }
+  };
+</script>
