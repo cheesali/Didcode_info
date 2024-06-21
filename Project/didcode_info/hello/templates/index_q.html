@@ -1,0 +1,163 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/daisyUI.css' %}" />
+    <title id="title"></title>
+  </head>
+  <style type="text/tailwindcss">
+    .card {
+      @apply grid bg-white w-auto h-auto 
+        justify-items-center items-center 
+        text-lg leading-none text-gray-500 
+        font-mono 
+        rounded-lg shadow-sm  
+        m-2 shadow-blue-500;
+    }
+    .input_info {
+      @apply border rounded-md px-3 py-2 
+        focus:outline-none focus:ring-2 
+        focus:ring-blue-500 w-56;
+    }
+    .card_base {
+      @apply grid grid-cols-2 gap-1 m-2;
+    }
+
+    .label {
+      @apply text-center w-auto;
+    }
+    .basic_button {
+      @apply m-1 bg-blue-500 hover:bg-blue-700 
+      text-white font-bold flex justify-center items-center
+      py-2 px-4 col-span-2 h-14 
+      rounded-md;
+    }
+    .upload_button {
+      @apply m-1 bg-red-500 hover:bg-red-700
+       text-white font-bold
+        flex justify-center
+         items-center
+        py-2 px-3 col-span-2 h-14 
+        rounded-md;
+    }
+    .data_info {
+      @apply text-lg leading-none text-gray-500  w-auto m-2
+      font-mono;
+    }
+  </style>
+  <body data-theme="light">
+    <div class="min-h-svh bg-slate-300">
+      <div class="flex flex-col min-h-svh static justify-start">
+        <div class="flex flex-row">
+          <div class="card">
+            <h2 class="text-2xl font-mono mb-1 text-center">
+              Карточка элемента
+            </h2>
+            <div class="card_base">
+              <label class="label">ID:</label>
+              <input class="input_info" readonly />
+              <label class="label">DIDCODE:</label>
+              <input class="input_info" readonly />
+              <label class="label">PART_NUMBER:</label>
+              <input class="input_info" readonly />
+              <label class="label">QTY:</label>
+              <input class="input_info" readonly />
+              <label class="label">LOT_ID:</label>
+              <input class="input_info" readonly />
+              <label class="label">INSERTION_DATETIME</label>
+              <input class="input_info" readonly />
+              <label class="label">INSERTION_USERID:</label>
+              <input class="input_info" readonly />
+              <label class="label">UPDATE_DATETIME:</label>
+              <input class="input_info" readonly />
+              <label class="label">UPDATE_USER_ID:</label>
+              <input class="input_info" readonly />
+              <label class="label">WAREHOUSE:</label>
+              <input class="input_info" readonly />
+              <div class="basic_button">
+                <button id="openSecondWindow">Добавить</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-row">
+            <div class="card">
+              <h2 class="text-2xl font-mono mb-1 text-center">Данные</h2>
+              <div class="card_base">
+                <label class="label">ID:</label>
+                <p class="data_info"></p>
+
+                <label class="label">DIDCODE:</label>
+                <p class="data_info" id="didcode-data"></p>
+
+                <label class="label">PART_NUMBER:</label>
+                <p class="data_info" id="part-number-data"></p>
+
+                <label class="label">QTY:</label>
+                <p class="data_info" id="qty-data"></p>
+
+                <label class="label">LOT_ID:</label>
+                <p class="data_info" id="insertion_datetime"></p>
+
+                <label class="label">INSERTION_DATETIME:</label>
+                <p class="data_info" id="insertion_userid"></p>
+
+                <label class="label">INSERTION_USERID:</label>
+                <p class="data_info" id="insertion_userid"></p>
+
+                <label class="label">UPDATE_DATETIME:</label>
+                <p class="data_info" id="udpate_datetime"></p>
+
+                <label class="label">UPDATE_USER_ID:</label>
+                <p class="data_info" id="update_user_id"></p>
+
+                <label class="label">WAREHOUSE:</label>
+                <p class="data_info" id="warehouse"></p>
+
+                <div class="upload_button">
+                  <span>Загрузить</span>
+                </div>
+              </div>
+            </div>
+            <script>
+              window.onload = async function () {
+                let response = await fetch("/get_info/DX562378");
+                if (response.ok) {
+                  let json = await response.json();
+
+                  console.log(json);
+
+                  document.getElementById("didcode-data").textContent =
+                    json.DIDCODE;
+
+                  document.getElementById("part-number-data").textContent =
+                    json.PART_NUMBER;
+
+                  document.getElementById("qty-data").textContent = json.QTY;
+
+                  document.getElementById("insertion_datetime").textContent =
+                    json.INSERTION_DATETIME;
+                  document.getElementById("insertion_userid").textContent =
+                    json.INSERTION_USERID;
+                  document.getElementById("udpate_datetime").textContent =
+                    json.UPDATE_DATETIME;
+                  document.getElementById("update_user_id").textContent =
+                    json.UPDATE_USER_ID;
+                  document.getElementById("warehouse").textContent =
+                    json.WAREHOUSE;
+                } else {
+                  alert("Ошибка HTTP: " + response.status);
+                }
+              };
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

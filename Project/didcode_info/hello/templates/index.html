@@ -1,0 +1,388 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/daisyUI.css' %}" />
+    <title id="title"></title>
+  </head>
+  <style type="text/tailwindcss">
+    .card {
+      @apply grid bg-white w-auto h-auto 
+        justify-items-center items-center 
+        text-lg leading-none text-gray-500 
+        font-mono 
+        rounded-lg shadow-sm  
+        m-2 shadow-blue-500;
+    }
+    .input_info {
+      @apply border rounded-md px-3 py-2 ring-1 ring-gray-100 
+        focus:outline-none focus:ring-2 mr-1
+        focus:ring-blue-500 w-auto;
+    }
+    .card_base {
+      @apply grid grid-cols-2 gap-1 m-2;
+    }
+    .card_base_3_c {
+      @apply grid grid-cols-3 gap-1 m-2;
+    }
+    .card_base_4_c {
+      @apply grid grid-cols-3 gap-1 m-2;
+    }
+    .label {
+      @apply text-center w-auto;
+    }
+    .basic_button {
+      @apply m-1 bg-blue-500 hover:bg-blue-700 
+      text-white font-bold flex justify-center items-center
+      py-2 px-4 col-span-2 h-14 w-auto mr-2
+      rounded-md;
+    }
+    .upload_button {
+      @apply m-1 bg-red-500 hover:bg-red-700
+       text-white font-bold
+        flex justify-center
+         items-center
+        py-2 px-3 col-span-2 h-14 
+        rounded-md;
+    }
+    .p-data_info {
+      @apply text-lg leading-none text-gray-500  w-auto border rounded-md px-3 py-2 ring-1 ring-gray-100 mr-1
+      font-mono;
+    }
+    .p-history_info {
+      @apply text-lg leading-none text-gray-500 ml-2 mb-7 w-72 border rounded-md ring-1 ring-gray-100 
+      font-mono;
+    }
+    .card_save {
+      @apply grid bg-white w-[380px] h-40
+        justify-items-center items-center 
+        text-lg leading-none text-gray-500 
+        font-mono 
+        rounded-lg shadow-sm  
+        m-2 shadow-blue-500;
+    }
+    .card_search {
+      @apply grid bg-white w-[380px] h-28
+        justify-items-center items-center 
+        text-lg leading-none text-gray-500 
+        font-mono 
+        rounded-lg shadow-sm  
+        m-2 shadow-blue-500;
+    }
+    .card_table {
+      @apply grid bg-white w-[380px] h-60
+        justify-items-center items-center 
+        text-lg leading-none text-gray-500 
+        font-mono 
+        rounded-lg shadow-sm  
+        m-2 shadow-blue-500;
+    }
+
+    .save_button {
+      @apply m-1 bg-green-500 hover:bg-green-700
+       text-white font-bold
+        flex justify-center
+         items-center
+        py-2 px-3 col-span-3 h-14 
+        rounded-md;
+    }
+  </style>
+  <body data-theme="light">
+    <div class="min-h-svh bg-slate-300">
+      <div class="flex flex-col min-h-svh static justify-start">
+        <div class="flex flex-row">
+          <div class="card">
+            <h2 class="text-2xl font-mono mb-1 text-center">
+              Карточка элемента
+            </h2>
+            <div class="card_base">
+              <label class="label">ID:</label>
+              <input id="input_info" class="input_info" />
+              <label class="label">DIDCODE:</label>
+              <input
+                type="text"
+                name="DIDCODE"
+                id="input_info"
+                class="input_info"
+              />
+              <label class="label">PART_NUMBER:</label>
+              <input
+                type="text"
+                name="PART_NUMBER"
+                id="input_info"
+                class="input_info"
+              />
+              <label class="label">QTY:</label>
+              <input
+                type="text"
+                name="QTY"
+                id="input_info"
+                class="input_info"
+              />
+              <label class="label">LOT_ID:</label>
+              <input
+                type="text"
+                name="LOT_ID"
+                id="input_info"
+                class="input_info"
+              />
+              <label class="label">INSERTION_DATETIME</label>
+              <input
+                type="text"
+                name="INSERTION_DATETIME"
+                id="input_info"
+                class="input_info"
+              />
+
+              <label class="label">INSERTION_USERID:</label>
+              <input
+                type="text"
+                name="INSERTION_USERID"
+                id="input_info"
+                class="input_info"
+              />
+
+              <label class="label">UPDATE_DATETIME:</label>
+              <input
+                type="text"
+                name="UPDATE_DATETIME"
+                id="input_info"
+                class="input_info"
+              />
+
+              <label class="label">UPDATE_USER_ID:</label>
+              <input
+                type="text"
+                name="UPDATE_USER_ID"
+                id="input_info"
+                class="input_info"
+              />
+
+              <label class="label">WAREHOUSE:</label>
+              <input
+                type="text"
+                name="WAREHOUSE"
+                id="input_info"
+                class="input_info"
+              />
+
+              <div class="basic_button">
+                <button id="insert-data">Добавить</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-row">
+            <div class="card">
+              <h2 class="text-2xl font-mono mb-1 text-center">Данные</h2>
+              <div class="card_base">
+                <label class="label">ID:</label>
+                <p class="p-data_info" id="didcode_id"></p>
+                <label class="label">DIDCODE:</label>
+                <p class="p-data_info" id="didcode-data"></p>
+                <label class="label">PART_NUMBER:</label>
+                <p class="p-data_info" id="part-number-data"></p>
+                <label class="label">QTY:</label>
+                <p class="p-data_info" id="qty-data">50</p>
+                <label class="label">LOT_ID:</label>
+                <p class="p-data_info" id="insertion_datetime">301</p>
+                <label class="label">INSERTION_DATETIME</label>
+                <p class="p-data_info" id="insertion_userid">
+                  2024-05-06 13:51:07.000
+                </p>
+                <label class="label">INSERTION_USERID:</label>
+                <p class="p-data_info" id="insertion_userid">4</p>
+                <label class="label">UPDATE_DATETIME:</label>
+                <p class="p-data_info" id="udpate_datetime">
+                  2024-05-06 13:51:07.000
+                </p>
+                <label class="label">UPDATE_USER_ID:</label>
+                <p class="p-data_info" id="update_user_id">0</p>
+                <label class="label">WAREHOUSE:</label>
+                <p class="p-data_info" id="warehouse">1</p>
+                <div class="upload_button">
+                  <button id="upload_button">Загрузить</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col">
+              <div class="card_save">
+                <h2 class="text-2xl font-mono mb-1 text-center">
+                  Внести изменения
+                </h2>
+
+                <div class="card_base_3_c">
+                  <label class="label">Параметр:</label>
+                  <select class="input_info" id="parameter-select">
+                    <option value="ID">ID</option>
+                    <option value="DIDCODE">DIDCODE</option>
+                    <option value="PART_NUMBER">PART_NUMBER</option>
+                    <option value="QTY">QTY</option>
+                    <option value="LOT_ID">LOT_ID</option>
+                    <option value="INSERTION_DATETIME">
+                      INSERTION_DATETIME
+                    </option>
+                    <option value="INSERTION_USERID">INSERTION_USERID</option>
+                    <option value="UPDATE_DATETIME">UPDATE_DATETIME</option>
+                    <option value="UPDATE_USER_ID">UPDATE_USER_ID</option>
+                    <option value="WAREHOUSE">WAREHOUSE</option>
+                  </select>
+                  <input class="input_info" id="input-info" />
+                  <div class="save_button">
+                    <button id="upload_button">Сохранить</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col">
+                <div class="card_search">
+                  <h2 class="text-2xl font-mono mb-1 text-center">Поиск</h2>
+
+                  <div class="card_base_4_c">
+                    <label for="didcode-input" class="label">DIDCODE:</label>
+
+                    <input
+                      type="text"
+                      class="input_info grid col-span-2"
+                      id="didcode-input"
+                    />
+                  </div>
+                </div>
+                <div class="flex flex-row">
+                  <div class="card_table">
+                    <div class="flex flex-row justify-between items-center">
+                      <label class="label text-2xl justify-center items-start"
+                        >История изменений:
+                      </label>
+                      <button class="basic_button">Перезагрузить</button>
+                    </div>
+                    <div class="card_base w-[305px] h-32 overflow-y-auto">
+                      <table class="table-auto w-full border border-b-gray-500">
+                        <thead>
+                          <tr>
+                            <th class="th">Действие</th>
+                            <th class="px-4 py-0.5">ID</th>
+                            <th class="px-4 py-0.5">Время</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="px-4 py-1 text-green-500">
+                              Сохранено изменение
+                            </td>
+                            <td class="px-4 py-0.5">12345</td>
+                            <td class="px-4 py-0.5">2023-10-26 10:30:00</td>
+                          </tr>
+                          <tr>
+                            <td class="px-4 py-0.5 text-red-500">
+                              Внесения удалены
+                            </td>
+                            <td class="px-4 py-0.5">67890</td>
+                            <td class="px-4 py-0.5">2023-10-26 11:15:00</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- добавить еще карточку -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const didcodeInput = document.getElementById("didcode-input");
+        const submitButton = document.getElementById("submit-button");
+        const parameterSelect = document.getElementById("parameter-select");
+        const inputInfo = document.getElementById("input-info");
+        const uploadButton = document.getElementById("upload_button");
+
+        didcodeInput.addEventListener("keyup", async (event) => {
+          if (event.key === "Enter") {
+            const didcode = didcodeInput.value;
+
+            let response = await fetch(`/get_info/${didcode}`);
+
+            if (response.ok) {
+              let json = await response.json();
+
+              console.log(json);
+
+              didcode_id.textContent = json.ID;
+              document.getElementById("didcode-data").textContent =
+                json.DIDCODE;
+              document.getElementById("part-number-data").textContent =
+                json.PART_NUMBER;
+              document.getElementById("qty-data").textContent = json.QTY;
+              document.getElementById("insertion_datetime").textContent =
+                json.INSERTION_DATETIME;
+              document.getElementById("insertion_userid").textContent =
+                json.INSERTION_USERID;
+              document.getElementById("udpate_datetime").textContent =
+                json.UPDATE_DATETIME;
+              document.getElementById("update_user_id").textContent =
+                json.UPDATE_USER_ID;
+              document.getElementById("warehouse").textContent = json.WAREHOUSE;
+            } else {
+              alert(
+                "Недействительный код катушки",
+                "Ошибка HTTP: " + response.status
+              );
+            }
+          }
+        });
+
+        const insertData = document.getElementById("insert-data");
+        const inputFields = document.querySelectorAll(".input_info");
+
+        insertData.addEventListener("click", () => {
+          const data = {};
+          inputFields.forEach((input) => {
+            // Находим класс, начинающийся с "input_info_"
+            const classList = input.classList;
+            let fieldName = null;
+            for (let i = 0; i < classList.length; i++) {
+              if (classList[i].startsWith("input_info_")) {
+                fieldName = classList[i].replace("input_info_", "");
+                break;
+              }
+            }
+
+            if (fieldName) {
+              data[fieldName] = input.value;
+            } else {
+              console.warn("Не удалось получить имя поля из класса элемента.");
+            }
+          });
+
+          fetch("/input_didcode_info/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => {
+              if (response.ok) {
+                console.log("Данные успешно отправлены");
+              } else {
+                console.error("Ошибка при отправке данных");
+              }
+            })
+            .catch((error) => {
+              console.error("Ошибка при отправке данных:", error);
+            });
+        });
+      </script>
+    </div>
+  </body>
+</html>
